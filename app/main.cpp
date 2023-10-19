@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 
 #include <SDL.h>
 #include <SDL_opengl.h>
@@ -9,27 +10,21 @@
 
 int main(void)
 {
-  std::cout << "hello world!" << std::endl;
+  SDL_Init(SDL_INIT_VIDEO);
 
-  std::cout << my_lib::sum(1,2) << std::endl;
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-  auto a = my_lib::add(glm::vec3(1.0f), glm::vec3(2.0f));
+  const int width = 800, height = 600;
 
-    SDL_Init( SDL_INIT_VIDEO );
+  SDL_Window *window = SDL_CreateWindow("", 0, 0, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+  SDL_GLContext context = SDL_GL_CreateContext(window);
 
-    SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 3 );
-    SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 2 );
-    SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE );
+  SDL_Delay(2000);
 
-  
-  static const int width = 800;
-  static const int height = 600;
-  SDL_Window * window = SDL_CreateWindow( "", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
-  SDL_GLContext context = SDL_GL_CreateContext( window );
-
-  SDL_GL_DeleteContext( context );
-  SDL_DestroyWindow( window );
+  SDL_GL_DeleteContext(context);
+  SDL_DestroyWindow(window);
   SDL_Quit();
-
   return 0;
 }
