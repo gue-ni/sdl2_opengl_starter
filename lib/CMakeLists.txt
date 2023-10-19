@@ -1,9 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(my-lib LANGUAGES CXX)
 
-find_package(OpenGL)
-
 include(FetchContent)
+
 FetchContent_Declare(
     glm GIT_REPOSITORY 
     https://github.com/g-truc/glm.git
@@ -31,10 +30,15 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(gl3w)
 
+
+# find_package(OpenGL)
+find_package(SDL2)
+
+
 add_library(my_lib STATIC my_lib.cpp my_lib.h)
 
 target_include_directories(my_lib PUBLIC .)
 
-target_link_libraries(my_lib PUBLIC glm::glm OpenGL SDL2 gl3w)
+target_link_libraries(my_lib PUBLIC glm::glm SDL2 gl3w)
 
 
