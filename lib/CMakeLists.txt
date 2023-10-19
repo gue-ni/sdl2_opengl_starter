@@ -26,6 +26,6 @@ add_library(my_lib STATIC my_lib.cpp my_lib.h)
 
 target_include_directories(my_lib PUBLIC .)
 
-target_link_libraries(my_lib PUBLIC glm::glm)
+target_link_libraries(my_lib PUBLIC glm::glm SDL2 imgui)
 
 
