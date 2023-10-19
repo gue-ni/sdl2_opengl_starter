@@ -22,10 +22,17 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SDL2)
 
+FetchContent_Declare(
+    gl3w
+    GIT_REPOSITORY https://github.com/bwrsandman/gl3w.git
+    GIT_TAG master
+)
+FetchContent_MakeAvailable(gl3w)
+
 add_library(my_lib STATIC my_lib.cpp my_lib.h)
 
 target_include_directories(my_lib PUBLIC .)
 
-target_link_libraries(my_lib PUBLIC glm::glm SDL2 imgui)
+target_link_libraries(my_lib PUBLIC glm::glm SDL2 gl3w)
 
 
