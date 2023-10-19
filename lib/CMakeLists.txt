@@ -34,7 +34,6 @@ FetchContent_MakeAvailable(gl3w)
 # find_package(OpenGL)
 find_package(SDL2)
 
-
 add_library(my_lib STATIC my_lib.cpp my_lib.h)
 
 target_include_directories(my_lib PUBLIC .)
