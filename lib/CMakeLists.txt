@@ -31,6 +31,7 @@ set(SDL2_DIR ${SDL2_SOURCE_DIR})
 #    GIT_TAG master
 #)
 #FetchContent_MakeAvailable(gl3w)
+find_file(SDL2_INCLUDE_DIR NAME SDL.h HINTS SDL2)
 
 else()
 find_package(SDL2 REQUIRED)
@@ -42,6 +43,7 @@ add_library(my_lib STATIC my_lib.cpp my_lib.h)
 
 target_include_directories(my_lib PUBLIC .)
 target_include_directories(my_lib PUBLIC ${SDL2_INCLUDE_DIRS})
+target_include_directories(my_lib PUBLIC ${SDL2_INCLUDE_DIR})
 target_include_directories(my_lib PUBLIC ${OPENGL_INCLUDE_DIR})
 
 target_link_libraries(my_lib PUBLIC glm::glm ${SDL2_LIBRARIES}  ${OPENGL_LIBRARIES})
