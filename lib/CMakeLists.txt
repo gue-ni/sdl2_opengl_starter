@@ -16,12 +16,13 @@ FetchContent_MakeAvailable(glm)
 #)
 #FetchContent_MakeAvailable(imgui)
 
-#FetchContent_Declare(
-#  SDL2
-#  URL https://www.libsdl.org/release/SDL2-2.26.5.tar.gz
-#  URL_HASH MD5=47f22c109070431ecccd90abd3c0ab6e
-#)
-#FetchContent_MakeAvailable(SDL2)
+if(WIN32)
+FetchContent_Declare(
+  SDL2
+  URL https://www.libsdl.org/release/SDL2-2.26.5.tar.gz
+  URL_HASH MD5=47f22c109070431ecccd90abd3c0ab6e
+)
+FetchContent_MakeAvailable(SDL2)
 
 #FetchContent_Declare(
 #    gl3w
@@ -29,6 +30,7 @@ FetchContent_MakeAvailable(glm)
 #    GIT_TAG master
 #)
 #FetchContent_MakeAvailable(gl3w)
+endif()
 
 find_package(SDL2 REQUIRED)
 find_package(OpenGL REQUIRED)
