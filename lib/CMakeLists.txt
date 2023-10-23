@@ -40,7 +40,7 @@ target_include_directories(my_lib PUBLIC ${SDL2_INCLUDE_DIRS})
 target_include_directories(my_lib PUBLIC ${OPENGL_INCLUDE_DIR})
 
 target_link_libraries(my_lib PUBLIC glm::glm)
-target_link_libraries(prog ${SDL2_LIBRARIES})
-target_link_libraries(prog ${OPENGL_LIBRARIES})
+target_link_libraries(my_lib ${SDL2_LIBRARIES})
+target_link_libraries(my_lib ${OPENGL_LIBRARIES})
 
 
