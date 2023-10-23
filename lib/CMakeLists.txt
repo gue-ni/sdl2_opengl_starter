@@ -32,9 +32,10 @@ set(SDL2_DIR ${SDL2_SOURCE_DIR})
 #)
 #FetchContent_MakeAvailable(gl3w)
 
+else()
+find_package(SDL2 REQUIRED)
 endif()
 
-find_package(SDL2 REQUIRED)
 find_package(OpenGL REQUIRED)
 
 add_library(my_lib STATIC my_lib.cpp my_lib.h)
