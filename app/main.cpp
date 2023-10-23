@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 
+#define GL_GLEXT_PROTOTYPES
 #include <SDL.h>
 #include <SDL_opengl.h>
 
