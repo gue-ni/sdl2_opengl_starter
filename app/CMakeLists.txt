@@ -3,4 +3,5 @@ project(template-app LANGUAGES CXX)
 
 add_executable(app main.cpp)
 
-target_link_libraries(app PUBLIC my_lib)
+target_link_libraries(app PUBLIC gfx)
+
