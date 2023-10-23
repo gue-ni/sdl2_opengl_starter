@@ -23,6 +23,7 @@ FetchContent_Declare(
   URL_HASH MD5=47f22c109070431ecccd90abd3c0ab6e
 )
 FetchContent_MakeAvailable(SDL2)
+set(SDL2_DIR ${SDL2_SOURCE_DIR})
 
 #FetchContent_Declare(
 #    gl3w
@@ -30,6 +31,7 @@ FetchContent_MakeAvailable(SDL2)
 #    GIT_TAG master
 #)
 #FetchContent_MakeAvailable(gl3w)
+
 endif()
 
 find_package(SDL2 REQUIRED)
