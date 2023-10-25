@@ -1,7 +1,7 @@
 #pragma once
 
 #define SDL_MAIN_HANDLED
-#define GL_GLEXT_PROTOTYPES
+#include <GL/glew.h>
 #include <SDL.h>
 #include <SDL_opengl.h>
 

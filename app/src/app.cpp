@@ -11,6 +11,9 @@ App::App(int width, int height)
   m_window = SDL_CreateWindow("App", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
   m_context = SDL_GL_CreateContext(m_window);
 
+  glewExperimental = GL_TRUE;
+  glewInit();
+
   glViewport(0, 0, width, height);
 }
 
