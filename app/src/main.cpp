@@ -1,17 +1,14 @@
 #include <iostream>
 #include <memory>
 
-#include "app.h"
+#include "engine.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtx/io.hpp>
 
 int main(void)
 {
-  glm::vec3 a(1.0f);
-  std::cout << a << std::endl;
-  
-  App app(640, 480);
-  app.run();
+  Engine engine(640, 480);
+  engine.run();
   return 0;
 }
