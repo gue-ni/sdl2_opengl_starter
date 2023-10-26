@@ -15,8 +15,6 @@ namespace gl
     }
   }
 
-  // Shader::Shader(const std::string& path) : Shader(load_text_file(path + ".vert"), load_text_file(path + ".frag")) {}
-
   Shader::Shader(const std::string &vertex_shader_source, const std::string &fragment_shader_source)
   {
     int success;

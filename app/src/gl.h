@@ -24,10 +24,6 @@ namespace gl
 
   void CheckError(const char *stmt, const char *fname, int line);
 
-  struct Object;
-  struct Texture;
-  using TexturePtr = std::shared_ptr<Texture>;
-
   struct Vertex
   {
     glm::vec3 Position;
@@ -41,11 +37,9 @@ namespace gl
     Object() = default;
     ~Object() = default;
 
-    // copy
     Object(const Object &src) = delete;
     Object &operator=(const Object &rhs) = delete;
 
-    // move
     Object(Object &&src) noexcept : m_id(src.m_id) { src.m_id = 0; }
     Object &operator=(Object &&rhs) noexcept
     {
@@ -149,7 +143,6 @@ namespace gl
 
   struct Shader : public Object
   {
-    // Shader(const std::string& path);
     Shader(const std::string &vertex_shader_source, const std::string &fragment_shader_source);
     ~Shader();
     void bind() const;
@@ -163,7 +156,6 @@ namespace gl
     void set_uniform(const std::string &name, const glm::mat4 &value) const;
     void set_uniform_buffer(const std::string &name, GLuint binding = 0U);
   };
-
 
 #if 0
 struct Texture : public Object {

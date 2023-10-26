@@ -24,11 +24,32 @@ App::App(int width, int height)
     : Window(width, height)
 {
   m_shader = std::make_unique<gl::Shader>(vertex_shader_source, fragment_shader_source);
+
+  std::vector<glm::vec3> vertices = {
+      {-0.5f, -0.5f, 0.0f}, // left
+      {0.5f, -0.5f, 0.0f},  // right
+      {0.0f, 0.5f, 0.0f}    // top
+  };
+
+  m_vbo = std::make_unique<gl::VertexBuffer>();
+  m_vao = std::make_unique<gl::VertexArrayObject>();
+
+  m_vao->bind();
+  m_vbo->bind();
+  m_vbo->buffer(vertices, GL_STATIC_DRAW);
+
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void *)0);
+  glEnableVertexAttribArray(0);
+
+  m_vao->unbind();
 }
 
 void App::render()
 {
-  glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+  glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
-  // rendering
+
+  m_shader->bind();
+  m_vao->bind();
+  glDrawArrays(GL_TRIANGLES, 0, 3);
 }
