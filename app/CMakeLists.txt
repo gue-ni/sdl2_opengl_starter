@@ -40,8 +40,9 @@ find_package(OpenGL REQUIRED)
 
 add_executable(app 
     src/main.cpp 
+    src/gl.cpp src/gl.h
+    src/window.cpp src/window.h
     src/app.cpp src/app.h
-    src/engine.cpp src/engine.h
 )
 
 target_link_libraries(app glm ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES})

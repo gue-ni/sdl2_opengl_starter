@@ -1,22 +1,18 @@
 #pragma once
 
-#define SDL_MAIN_HANDLED
-#include <GL/glew.h>
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include "Window.h"
+#include "gl.h"
 
-class App
+#include <memory>
+
+class App : public Window
 {
 public:
-    App(int width, int height);
-    ~App();
-    void run();
+  App(int width, int height);
+  void render() override;
 
-protected:
-    bool m_quit = false;
-    SDL_Window *m_window = nullptr;
-    SDL_GLContext m_context = nullptr;
-
-    void poll_events();
-    virtual void render();
+private:
+  std::unique_ptr<gl::Shader> m_shader = nullptr;
+  std::unique_ptr<gl::VertexArrayObject> m_vao = nullptr;
+  std::unique_ptr<gl::VertexBuffer> m_vbo = nullptr;
 };

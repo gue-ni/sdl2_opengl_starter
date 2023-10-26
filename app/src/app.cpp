@@ -1,68 +1,34 @@
 #include "app.h"
 
+#include <cassert>
+#include <iostream>
+#include <string>
+
+const std::string vertex_shader_source = R"(
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main() {
+  gl_Position = vec4(aPos, 1.0);
+}
+)";
+
+const std::string fragment_shader_source = R"(
+#version 330 core
+out vec4 FragColor;
+void main() {
+  FragColor = vec4(0,1,0,1);
+}
+)";
+
 App::App(int width, int height)
+    : Window(width, height)
 {
-  SDL_Init(SDL_INIT_VIDEO);
-
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-
-  m_window = SDL_CreateWindow("App", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-  m_context = SDL_GL_CreateContext(m_window);
-
-  glewExperimental = GL_TRUE;
-  glewInit();
-
-  glViewport(0, 0, width, height);
-}
-
-App::~App()
-{
-  SDL_GL_DeleteContext(m_context);
-  SDL_DestroyWindow(m_window);
-  SDL_Quit();
-}
-
-void App::run()
-{
-  while (!m_quit)
-  {
-    poll_events();
-    render();
-    SDL_GL_SwapWindow(m_window);
-  }
-}
-
-void App::poll_events()
-{
-  SDL_Event event;
-  while (SDL_PollEvent(&event) != 0)
-  {
-    switch (event.type)
-    {
-    case SDL_QUIT:
-    {
-      m_quit = true;
-      break;
-    }
-    case SDL_KEYDOWN:
-    {
-      switch (event.key.keysym.sym)
-      {
-      case SDLK_ESCAPE:
-      {
-        m_quit = true;
-        break;
-      }
-      }
-    }
-    }
-  }
+  m_shader = std::make_unique<gl::Shader>(vertex_shader_source, fragment_shader_source);
 }
 
 void App::render()
 {
-  glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+  glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
+  // rendering
 }
