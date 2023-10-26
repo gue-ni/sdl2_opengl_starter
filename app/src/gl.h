@@ -186,6 +186,7 @@ struct Texture : public Object {
 struct CubemapTexture : public Texture {
   CubemapTexture(const std::array<std::string, 6>& paths, bool flip_vertically = false);
 };
+
 class TextureArray : public Object
 {
  public:

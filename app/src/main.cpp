@@ -3,12 +3,9 @@
 
 #include "app.h"
 
-#include <glm/glm.hpp>
-#include <glm/gtx/io.hpp>
-
 int main(void)
 {
-  App engine(640, 480);
-  engine.run();
+  App app(640, 480);
+  app.run();
   return 0;
 }

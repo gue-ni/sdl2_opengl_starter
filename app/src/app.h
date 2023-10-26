@@ -8,8 +8,10 @@
 class App : public Window
 {
 public:
+
+
   App(int width, int height);
-  void render() override;
+  void render(float dt) override;
 
 private:
   std::unique_ptr<gl::Shader> m_shader = nullptr;

@@ -26,10 +26,12 @@ Window::~Window()
 
 void Window::run()
 {
+  m_clock.init();
   while (!m_quit)
   {
+    m_clock.tick();
     poll_events();
-    render();
+    render(m_clock.delta);
     SDL_GL_SwapWindow(m_window);
   }
 }
@@ -61,7 +63,7 @@ void Window::poll_events()
   }
 }
 
-void Window::render()
+void Window::render(float dt)
 {
   glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
