@@ -31,7 +31,9 @@ if(WIN32)
     FetchContent_MakeAvailable(SDL2)
 
 
-    set(SDL2_DIR "${CMAKE_SOURCE_DIR}/build/_deps/sdl2-src/cmake")
+    #set(SDL2_DIR "${CMAKE_SOURCE_DIR}/build/_deps/sdl2-src/cmake")
+
+    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/build/_deps/sdl2-src")
     list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/build/_deps/glew-src")
 
 endif(WIN32)
@@ -53,6 +55,7 @@ include_directories(${CMAKE_SOURCE_DIR}/build/_deps/stb-src)
 add_executable(app 
     src/main.cpp 
     src/gl.cpp src/gl.h
+    src/image.cpp src/image.h
     src/window.cpp src/window.h
     src/app.cpp src/app.h
 )

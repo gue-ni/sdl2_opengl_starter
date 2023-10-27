@@ -7,6 +7,11 @@
 #include <glm/gtx/io.hpp>
 
 #include <vector>
+#include <memory>
+
+#include "image.h"
+
+#define IMAGE 1
 
 #if 1
 #define GL_CALL(stmt)                      \
@@ -157,35 +162,39 @@ namespace gl
     void set_uniform_buffer(const std::string &name, GLuint binding = 0U);
   };
 
-#if 0
-struct Texture : public Object {
-  const GLenum target;
+#if IMAGE
+  struct Texture : public Object
+  {
+    const GLenum target;
 
-  struct Params {
-    bool flip_vertically = false;
-    GLint wrap = GL_REPEAT;
-    GLint min_filter = GL_LINEAR_MIPMAP_LINEAR;
-    GLint mag_filter = GL_NEAREST;
+    struct Params
+    {
+      bool flip_vertically = false;
+      GLint wrap = GL_REPEAT;
+      GLint min_filter = GL_LINEAR_MIPMAP_LINEAR;
+      GLint mag_filter = GL_NEAREST;
+    };
+
+    Texture(GLenum target_ = GL_TEXTURE_2D) : target(target_) { glGenTextures(1, &m_id); }
+    ~Texture() { glDeleteTextures(1, &m_id); }
+    Texture(const std::string &path);
+    Texture(const std::string &path, const Params &params);
+    Texture(const Image &image, const Params &params);
+    void bind() const;
+    void bind(GLuint texture_unit) const;
+    void unbind() const;
+    void set_parameter(GLenum pname, GLint param);
+    void set_parameter(GLenum pname, GLfloat param);
+    void set_parameter(GLenum pname, const GLfloat *param);
+    static std::shared_ptr<Texture> load(const std::string &path, const Params &params);
+    static std::shared_ptr<Texture> load(const std::string &path);
   };
 
-  Texture(GLenum target_ = GL_TEXTURE_2D) : target(target_) { glGenTextures(1, &m_id); }
-  ~Texture() { glDeleteTextures(1, &m_id); }
-  Texture(const std::string& path);
-  Texture(const std::string& path, const Params& params);
-  Texture(const Image& image, const Params& params);
-  void bind() const;
-  void bind(GLuint texture_unit) const;
-  void unbind() const;
-  void set_parameter(GLenum pname, GLint param);
-  void set_parameter(GLenum pname, GLfloat param);
-  void set_parameter(GLenum pname, const GLfloat* param);
-  static TexturePtr load(const std::string& path, const Params& params);
-  static TexturePtr load(const std::string& path);
-};
-
+#if 0
 struct CubemapTexture : public Texture {
   CubemapTexture(const std::array<std::string, 6>& paths, bool flip_vertically = false);
 };
+
 
 class TextureArray : public Object
 {
@@ -215,6 +224,7 @@ class TextureArray : public Object
   const int m_array_size;
   int m_image_index = 0;
 };
+#endif
 #endif
 
 }
