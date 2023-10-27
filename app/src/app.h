@@ -17,5 +17,6 @@ private:
   std::unique_ptr<gl::Shader> m_shader = nullptr;
   std::unique_ptr<gl::VertexArrayObject> m_vao = nullptr;
   std::unique_ptr<gl::VertexBuffer> m_vbo = nullptr;
+  std::shared_ptr<gl::Texture> m_texture = nullptr;
   float m_time = 0.0f;
 };

@@ -8,7 +8,9 @@ const std::string vertex_shader_source = R"(
 #version 330 core
 layout (location = 0) in vec3 a_pos;
 uniform mat4 transform;
+out vec2 uv;
 void main() {
+  uv = a_pos.xy;
   gl_Position = transform * vec4(a_pos, 1.0);
 }
 )";
@@ -16,8 +18,11 @@ void main() {
 const std::string fragment_shader_source = R"(
 #version 330 core
 out vec4 FragColor;
+in vec2 uv;
+uniform sampler2D tex;
 void main() {
-  vec3 color = vec3(0.5, 1.0, 0.5);
+  // vec3 color = vec3(0.5, 1.0, 0.5);
+  vec3 color = texture(tex, uv).rgb;
   FragColor = vec4(color, 1.0);
 }
 )";
@@ -44,6 +49,8 @@ App::App(int width, int height)
   glEnableVertexAttribArray(0);
 
   m_vao->unbind();
+
+  m_texture = gl::Texture::load("C:/Users/jakob/Documents/Projects/OpenGL_Flightsim/OpenGL_Flightsim/assets/textures/container.jpg");
 }
 
 void App::render(float dt)
@@ -51,15 +58,18 @@ void App::render(float dt)
   m_time += dt;
   glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
-  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+  // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
   float speed = 40.0f;
   glm::mat4 transform = glm::mat4(1.0f);
   transform = glm::rotate(transform, glm::radians(m_time * speed * 1.0f), glm::vec3(0.0, 0.0, 1.0));
   transform = glm::rotate(transform, glm::radians(m_time * speed * 1.5f), glm::vec3(0.0, 1.0, 0.0));
 
+  m_texture->bind(0);
+
   m_shader->bind();
   m_shader->set_uniform("transform", transform);
+  m_shader->set_uniform("tex", 0);
   m_vao->bind();
   glDrawArrays(GL_TRIANGLES, 0, 3);
 }
