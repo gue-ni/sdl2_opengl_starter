@@ -8,22 +8,33 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(glm)
 
-if(WIN32)
-    # FetchContent_Declare(
-    #     SDL2
-    #     #URL https://www.libsdl.org/release/SDL2-2.26.5.tar.gz
-    #     #URL_HASH MD5=47f22c109070431ecccd90abd3c0ab6e
-    #     URL     https://www.libsdl.org/release/SDL2-devel-2.0.14-VC.zip
-    #     URL_MD5 2b521c5ec247955dc342235d06ebd874
-    # )
-    # FetchContent_MakeAvailable(SDL2)
-    # message(SEND_ERROR "src = ${SDL2_SOURCE_DIR}")
-    # set(SDL2_DIR ${SDL2_SOURCE_DIR}/cmake)
-endif(WIN32)
+FetchContent_Declare(
+    stb GIT_REPOSITORY 
+    https://github.com/nothings/stb
+)
+FetchContent_MakeAvailable(stb)
+
+FetchContent_Declare(
+    GLEW
+    # URL https://sourceforge.net/projects/glew/files/glew/2.1.0/glew-2.1.0.zip
+    URL https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0-win32.zip
+)
+FetchContent_MakeAvailable(GLEW)
+
+FetchContent_Declare(
+    SDL2
+    # URL https://www.libsdl.org/release/SDL2-2.26.5.tar.gz
+    URL https://github.com/libsdl-org/SDL/releases/download/release-2.26.4/SDL2-devel-2.26.4-VC.zip
+)
+FetchContent_MakeAvailable(SDL2)
+
 
 project(app LANGUAGES CXX)
 
-set(SDL2_DIR C:/Users/jakob/Documents/libraries/SDL2/cmake)
+#set(SDL2_DIR C:/Users/jakob/Documents/libraries/SDL2/cmake)
+#list(APPEND CMAKE_PREFIX_PATH "C:/Users/jakob/Documents/Projects/cpp_cmake_template/build/_deps/sdl2-src/cmake")
+
+set(SDL2_DIR "C:/Users/jakob/Documents/Projects/cpp_cmake_template/build/_deps/sdl2-src/cmake")
 
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
@@ -31,7 +42,10 @@ include_directories(${SDL2_INCLUDE_DIRS})
 #set(GLEW_LIBRARIES C:/Users/jakob/Documents/libraries/glew-2.1.0/lib/Release/x64)
 #set(GLEW_INCLUDE_DIRS C:/Users/jakob/Documents/libraries/glew-2.1.0/include)
 
+
 list(APPEND CMAKE_PREFIX_PATH "C:/Users/jakob/Documents/libraries/glew-2.1.0")
+
+#list(APPEND CMAKE_PREFIX_PATH "C:/Users/jakob/Documents/Projects/cpp_cmake_template/build/_deps/glew-src/cmake")
 
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
