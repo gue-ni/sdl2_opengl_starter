@@ -14,38 +14,33 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(stb)
 
-FetchContent_Declare(
-    GLEW
-    # URL https://sourceforge.net/projects/glew/files/glew/2.1.0/glew-2.1.0.zip
-    URL https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0-win32.zip
-)
-FetchContent_MakeAvailable(GLEW)
+if(WIN32)
 
-FetchContent_Declare(
-    SDL2
-    # URL https://www.libsdl.org/release/SDL2-2.26.5.tar.gz
-    URL https://github.com/libsdl-org/SDL/releases/download/release-2.26.4/SDL2-devel-2.26.4-VC.zip
-)
-FetchContent_MakeAvailable(SDL2)
+    FetchContent_Declare(
+        GLEW
+        # URL https://sourceforge.net/projects/glew/files/glew/2.1.0/glew-2.1.0.zip
+        URL https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0-win32.zip
+    )
+    FetchContent_MakeAvailable(GLEW)
 
+    FetchContent_Declare(
+        SDL2
+        # URL https://www.libsdl.org/release/SDL2-2.26.5.tar.gz
+        URL https://github.com/libsdl-org/SDL/releases/download/release-2.26.4/SDL2-devel-2.26.4-VC.zip
+    )
+    FetchContent_MakeAvailable(SDL2)
+
+endif(WIN32)
 
 project(app LANGUAGES CXX)
 
-#set(SDL2_DIR C:/Users/jakob/Documents/libraries/SDL2/cmake)
-#list(APPEND CMAKE_PREFIX_PATH "C:/Users/jakob/Documents/Projects/cpp_cmake_template/build/_deps/sdl2-src/cmake")
-
-set(SDL2_DIR "C:/Users/jakob/Documents/Projects/cpp_cmake_template/build/_deps/sdl2-src/cmake")
+set(SDL2_DIR "${CMAKE_SOURCE_DIR}/build/_deps/sdl2-src/cmake")
 
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
-#set(GLEW_LIBRARIES C:/Users/jakob/Documents/libraries/glew-2.1.0/lib/Release/x64)
-#set(GLEW_INCLUDE_DIRS C:/Users/jakob/Documents/libraries/glew-2.1.0/include)
 
-
-list(APPEND CMAKE_PREFIX_PATH "C:/Users/jakob/Documents/libraries/glew-2.1.0")
-
-#list(APPEND CMAKE_PREFIX_PATH "C:/Users/jakob/Documents/Projects/cpp_cmake_template/build/_deps/glew-src/cmake")
+list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/build/_deps/glew-src/cmake")
 
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
