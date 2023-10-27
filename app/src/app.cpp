@@ -50,7 +50,7 @@ App::App(int width, int height)
 
   m_vao->unbind();
 
-  m_texture = gl::Texture::load("C:/Users/jakob/Documents/Projects/OpenGL_Flightsim/OpenGL_Flightsim/assets/textures/container.jpg");
+  m_texture = gl::Texture::load("../assets/container.jpg");
 }
 
 void App::render(float dt)
