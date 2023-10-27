@@ -46,6 +46,10 @@ include_directories(${GLEW_INCLUDE_DIRS})
 
 find_package(OpenGL REQUIRED)
 
+#include_directories(${CMAKE_SOURCE_DIR}/app/src)
+
+include_directories(${CMAKE_SOURCE_DIR}/build/_deps/stb-src)
+
 add_executable(app 
     src/main.cpp 
     src/gl.cpp src/gl.h
@@ -53,7 +57,7 @@ add_executable(app
     src/app.cpp src/app.h
 )
 
-include_directories(src)
+
 
 target_link_libraries(app glm ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES})
 

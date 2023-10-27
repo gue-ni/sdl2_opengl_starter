@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Window.h"
+#include "window.h"
 #include "gl.h"
 
 #include <memory>
