@@ -40,7 +40,9 @@ find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
 
-list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/build/_deps/glew-src/cmake")
+list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/build/_deps/glew-src")
+#list(APPEND CMAKE_PREFIX_PATH "C:/Users/jakob/Documents/Projects/cpp_cmake_template/build/_deps/glew-src")
+
 
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
@@ -53,6 +55,8 @@ add_executable(app
     src/window.cpp src/window.h
     src/app.cpp src/app.h
 )
+
+include_directories(src)
 
 target_link_libraries(app glm ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES})
 
