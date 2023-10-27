@@ -21,8 +21,11 @@ out vec4 FragColor;
 in vec2 uv;
 uniform sampler2D tex;
 void main() {
-  // vec3 color = vec3(0.5, 1.0, 0.5);
+#if 0
+  vec3 color = vec3(0.5, 1.0, 0.5);
+#else
   vec3 color = texture(tex, uv).rgb;
+#endif
   FragColor = vec4(color, 1.0);
 }
 )";
@@ -33,9 +36,10 @@ App::App(int width, int height)
   m_shader = std::make_unique<gl::Shader>(vertex_shader_source, fragment_shader_source);
 
   std::vector<glm::vec3> vertices = {
-      {-0.5f, -0.5f, 0.0f}, // left
-      {0.5f, -0.5f, 0.0f},  // right
-      {0.0f, 0.5f, 0.0f}    // top
+      {-0.5f, -0.5f, 0.0f},
+      {0.5f, -0.5f, 0.0f},
+      {-0.5f, 0.5f, 0.0f},
+      {0.5f, 0.5f, 0.0f},
   };
 
   m_vbo = std::make_unique<gl::VertexBuffer>();
@@ -58,6 +62,7 @@ void App::render(float dt)
   m_time += dt;
   glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
+  
   // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
   float speed = 40.0f;
@@ -71,5 +76,5 @@ void App::render(float dt)
   m_shader->set_uniform("transform", transform);
   m_shader->set_uniform("tex", 0);
   m_vao->bind();
-  glDrawArrays(GL_TRIANGLES, 0, 3);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }

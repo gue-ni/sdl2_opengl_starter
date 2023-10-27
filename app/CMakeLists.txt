@@ -54,8 +54,9 @@ include_directories(${CMAKE_SOURCE_DIR}/build/_deps/stb-src)
 
 add_executable(app 
     src/main.cpp 
-    src/gl.cpp src/gl.h
-    src/image.cpp src/image.h
+    src/gfx/gfx.h
+    src/gfx/gl.cpp src/gfx/gl.h
+    src/gfx/image.cpp src/gfx/image.h
     src/window.cpp src/window.h
     src/app.cpp src/app.h
 )

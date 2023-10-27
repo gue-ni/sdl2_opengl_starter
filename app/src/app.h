@@ -1,7 +1,7 @@
 #pragma once
 
 #include "window.h"
-#include "gl.h"
+#include "gfx/gfx.h"
 
 #include <memory>
 
