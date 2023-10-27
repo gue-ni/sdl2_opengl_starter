@@ -30,19 +30,16 @@ if(WIN32)
     )
     FetchContent_MakeAvailable(SDL2)
 
+
+    set(SDL2_DIR "${CMAKE_SOURCE_DIR}/build/_deps/sdl2-src/cmake")
+    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/build/_deps/glew-src")
+
 endif(WIN32)
 
 project(app LANGUAGES CXX)
 
-set(SDL2_DIR "${CMAKE_SOURCE_DIR}/build/_deps/sdl2-src/cmake")
-
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
-
-
-list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/build/_deps/glew-src")
-#list(APPEND CMAKE_PREFIX_PATH "C:/Users/jakob/Documents/Projects/cpp_cmake_template/build/_deps/glew-src")
-
 
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
