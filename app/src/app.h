@@ -8,8 +8,6 @@
 class App : public Window
 {
 public:
-
-
   App(int width, int height);
   void render(float dt) override;
   void keydown(SDL_Keycode key) override;

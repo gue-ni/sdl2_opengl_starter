@@ -1,6 +1,7 @@
 #include "window.h"
 
-Window::Window(int width, int height)
+Window::Window(int width, int height, const std::string &name)
+    : m_width(width), m_height(height)
 {
   SDL_Init(SDL_INIT_VIDEO);
 
@@ -8,7 +9,7 @@ Window::Window(int width, int height)
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-  m_window = SDL_CreateWindow("Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+  m_window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
   m_context = SDL_GL_CreateContext(m_window);
 
   glewExperimental = GL_TRUE;
@@ -38,10 +39,11 @@ void Window::run()
 
 void Window::poll_events()
 {
-  SDL_Event event;
-  while (SDL_PollEvent(&event) != 0)
+  SDL_Event e;
+  while (SDL_PollEvent(&e) != 0)
   {
-    switch (event.type)
+    event(e);
+    switch (e.type)
     {
     case SDL_QUIT:
     {
@@ -50,15 +52,15 @@ void Window::poll_events()
     }
     case SDL_KEYDOWN:
     {
-      keydown(event.key.keysym.sym);
+      keydown(e.key.keysym.sym);
     }
     case SDL_KEYUP:
     {
-      keyup(event.key.keysym.sym);
+      keyup(e.key.keysym.sym);
     }
     case SDL_MOUSEMOTION:
     {
-      mousemotion(event.motion.xrel, event.motion.yrel);
+      mousemotion(e.motion.xrel, e.motion.yrel);
       break;
     }
     }
@@ -71,6 +73,10 @@ void Window::render(float dt)
   glClear(GL_COLOR_BUFFER_BIT);
 }
 
+void Window::event(const SDL_Event &event)
+{
+}
+
 void Window::keydown(SDL_Keycode key)
 {
 }
@@ -81,4 +87,17 @@ void Window::keyup(SDL_Keycode key)
 
 void Window::mousemotion(int xrel, int yrel)
 {
+}
+
+void Window::Clock::init()
+{
+  now = SDL_GetPerformanceCounter();
+}
+
+void Window::Clock::tick()
+{
+  last = now;
+  now = SDL_GetPerformanceCounter();
+  uint64_t freqency = SDL_GetPerformanceFrequency();
+  delta = static_cast<float>(now - last) / static_cast<float>(freqency);
 }
