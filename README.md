@@ -18,16 +18,8 @@ cmake --build .
 ### Linux
 
 ````bash
-
-```bash
 sudo apt install libsdl2-dev libsdl2-image-dev libglew-dev libgle3-dev
-
-mkdir build
-cd build
+mkdir build && cd build
 cmake ..
 cmake --build .
-````
-
-```
-
 ```
