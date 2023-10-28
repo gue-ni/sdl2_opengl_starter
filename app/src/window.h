@@ -33,7 +33,9 @@ protected:
     Clock m_clock;
 
     void poll_events();
+
     virtual void render(float dt);
     virtual void keydown(SDL_Keycode key);
     virtual void keyup(SDL_Keycode key);
+    virtual void mousemotion(int xrel, int yrel);
 };

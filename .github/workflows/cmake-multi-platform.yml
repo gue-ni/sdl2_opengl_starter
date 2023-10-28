@@ -33,7 +33,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install OpenGL
+    - name: Install Dependencies
       if: matrix.os == 'ubuntu-latest'
       run: sudo apt install libglm-dev libsdl2-dev libsdl2-image-dev libglew-dev libgle3-dev 
 

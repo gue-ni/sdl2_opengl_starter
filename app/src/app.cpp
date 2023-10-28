@@ -67,8 +67,10 @@ void App::render(float dt)
 
   float speed = 40.0f;
   glm::mat4 transform = glm::mat4(1.0f);
+#if 0
   transform = glm::rotate(transform, glm::radians(m_time * speed * 1.0f), glm::vec3(0.0, 0.0, 1.0));
   transform = glm::rotate(transform, glm::radians(m_time * speed * 1.5f), glm::vec3(0.0, 1.0, 0.0));
+#endif
 
   m_texture->bind(0);
 

@@ -56,6 +56,11 @@ void Window::poll_events()
     {
       keyup(event.key.keysym.sym);
     }
+    case SDL_MOUSEMOTION:
+    {
+      mousemotion(event.motion.xrel, event.motion.yrel);
+      break;
+    }
     }
   }
 }
@@ -71,5 +76,9 @@ void Window::keydown(SDL_Keycode key)
 }
 
 void Window::keyup(SDL_Keycode key)
+{
+}
+
+void Window::mousemotion(int xrel, int yrel)
 {
 }
