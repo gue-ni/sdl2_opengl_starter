@@ -1,2 +1,3 @@
-#include "gfx/gl.h"
-#include "gfx/image.h"
+#pragma once
+#include "gl.h"
+#include "image.h"
