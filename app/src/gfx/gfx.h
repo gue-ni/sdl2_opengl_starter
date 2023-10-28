@@ -1,2 +1,2 @@
-#include "gfx/gl.h"
-#include "gfx/image.h"
+#include "gl.h"
+#include "image.h"
