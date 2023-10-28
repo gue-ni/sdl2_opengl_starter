@@ -17,6 +17,12 @@ public:
 
   Image(const std::string &path, bool flip_vertically = false);
   ~Image();
+
+  Image(const Image &other) = delete;
+  Image &operator=(const Image &other) = delete;
+  Image(Image &&other) noexcept;
+  Image &operator=(Image &&other) noexcept;
+
   unsigned char *data() const;
   int width() const;
   int height() const;

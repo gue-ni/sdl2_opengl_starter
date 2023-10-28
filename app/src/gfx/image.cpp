@@ -4,6 +4,7 @@
 #include <stb_image.h>
 
 #include <iostream>
+#include <utility>
 
 Image::Image(const std::string &path, bool flip_vertically)
 {
@@ -16,7 +17,29 @@ Image::Image(const std::string &path, bool flip_vertically)
   assert(m_data != nullptr);
 }
 
-Image::~Image() { stbi_image_free(m_data); }
+
+
+Image::~Image()
+{
+  if (m_data != nullptr)
+  {
+    stbi_image_free(m_data);
+  }
+}
+
+Image::Image(Image &&other) noexcept
+    : m_data(std::exchange(other.m_data, nullptr)), m_width(other.width()), m_height(other.height()), m_channels(other.channels())
+{
+}
+
+Image &Image::operator=(Image &&other) noexcept
+{
+  std::swap(m_data, other.m_data);
+  m_width = other.width();
+  m_height = other.height();
+  m_channels = other.channels();
+  return *this;
+}
 
 unsigned char *Image::data() const { return m_data; }
 
