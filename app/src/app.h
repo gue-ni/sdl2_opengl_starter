@@ -12,6 +12,7 @@ public:
 
   App(int width, int height);
   void render(float dt) override;
+  void keydown(SDL_Keycode key) override;
 
 private:
   std::unique_ptr<gl::Shader> m_shader = nullptr;

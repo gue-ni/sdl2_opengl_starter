@@ -50,14 +50,11 @@ void Window::poll_events()
     }
     case SDL_KEYDOWN:
     {
-      switch (event.key.keysym.sym)
-      {
-      case SDLK_ESCAPE:
-      {
-        m_quit = true;
-        break;
-      }
-      }
+      keydown(event.key.keysym.sym);
+    }
+    case SDL_KEYUP:
+    {
+      keyup(event.key.keysym.sym);
     }
     }
   }
@@ -67,4 +64,12 @@ void Window::render(float dt)
 {
   glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void Window::keydown(SDL_Keycode key)
+{
+}
+
+void Window::keyup(SDL_Keycode key)
+{
 }

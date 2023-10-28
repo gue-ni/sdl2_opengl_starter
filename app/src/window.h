@@ -34,4 +34,6 @@ protected:
 
     void poll_events();
     virtual void render(float dt);
+    virtual void keydown(SDL_Keycode key);
+    virtual void keyup(SDL_Keycode key);
 };
