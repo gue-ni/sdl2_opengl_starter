@@ -53,12 +53,12 @@ find_package(OpenGL REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR}/build/_deps/stb-src)
 
 add_executable(app 
-    src/main.cpp 
-    src/gfx/gfx.h
-    src/gfx/gl.cpp src/gfx/gl.h
-    src/gfx/image.cpp src/gfx/image.h
-    src/window.cpp src/window.h
-    src/app.cpp src/app.h
+    main.cpp 
+    window.cpp window.h
+    app.cpp app.h
+    gfx/gfx.h
+    gfx/gl.cpp gfx/gl.h
+    gfx/image.cpp gfx/image.h
 )
 
 target_link_libraries(app glm ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES})
